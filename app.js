@@ -13,14 +13,18 @@ const createGrid = (amountOfGrids) => {
             //making a loop so that the rows have columns
             for (j= 0; j < amountOfGrids; j++) {
             // column makes a div
-            const column = document.createElement('div');
-            column.classList.add('gridColumn')
-            row.appendChild(column)
+            const square = document.createElement('div');
+            square.classList.add('gridSquares')
+            square.addEventListener('mouseover', () => {
+                square.style.backgroundColor = 'black';
+            });
+            row.appendChild(square)
         }
 
         container.appendChild(row)
     }
 
 }
+
 
 createGrid(sizeOfGrid)

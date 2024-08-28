@@ -14,11 +14,10 @@ body {
     border: 1px solid black;
     height: 50px;
     width: 50px;
-    background-color: yellow;
 
 }
 
-.gridColumn {
+.gridSquares {
     flex-direction: column;
     border: 1px solid black;
     height: 50px;
