@@ -16,7 +16,8 @@ const createGrid = (amountOfGrids) => {
             const square = document.createElement('div');
             square.classList.add('gridSquares')
             square.addEventListener('mouseover', () => {
-                square.style.backgroundColor = 'black';
+                square.classList.remove('gridSquares')
+                square.classList.add('hover')
             });
             row.appendChild(square)
         }
