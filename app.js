@@ -27,5 +27,9 @@ const createGrid = (amountOfGrids) => {
 
 }
 
+function gridResizePrompt(){
+    let getNumberOfRowsAndColumns = prompt("Please provide a number between 1 - 100");
+}
+
 
 createGrid(sizeOfGrid)
