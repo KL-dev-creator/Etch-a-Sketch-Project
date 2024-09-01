@@ -28,7 +28,18 @@ const createGrid = (amountOfGrids) => {
 }
 
 function gridResizePrompt(){
-    let getNumberOfRowsAndColumns = prompt("Please provide a number between 1 - 100");
+    let getNumberOfRowsAndColumns = prompt("Please provide a number between 1 to 100");
+    let validationChecker = parseInt.getNumberOfRowsAndColumns;
+    console.log(validationChecker)
+    if (validationChecker === undefined) {
+        alert("Invalid input: Please input a valid integer between 1 to 100")
+    }else if (getNumberOfRowsAndColumns > 100) {
+        alert("Invalid input: The number requested is greater than 100")
+    } else if (getNumberOfRowsAndColumns <= 100 && getNumberOfRowsAndColumns > 0) {
+        console.log("Correct!")
+    } else {
+        alert("Invalid input: The number requested is less than 0")
+    }
 }
 
 
