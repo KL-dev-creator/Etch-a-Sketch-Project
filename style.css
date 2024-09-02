@@ -8,13 +8,13 @@ body {
     display: flex;
     align-items: center;
     background-color: yellow;
+    border: 1px solid red;
+    height: auto;
+    width: auto;
 }
 
 .gridRow {
     flex-direction: row;
-    height: 50px;
-    width: 50px;
-
 }
 
 .gridSquares {

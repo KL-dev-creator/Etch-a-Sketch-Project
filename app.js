@@ -21,24 +21,24 @@ const createGrid = (amountOfGrids) => {
             });
             row.appendChild(square)
         }
-
         container.appendChild(row)
     }
 
 }
 
+
+
 function gridResizePrompt(){
-    let getNumberOfRowsAndColumns = prompt("Please provide a number between 1 to 100");
-    let validationChecker = parseInt.getNumberOfRowsAndColumns;
-    console.log(validationChecker)
-    if (validationChecker === undefined) {
-        alert("Invalid input: Please input a valid integer between 1 to 100")
-    }else if (getNumberOfRowsAndColumns > 100) {
+    let getNumberOfRowsAndColumns = prompt("Please input a valid integer between 1 to 100 for the number of squares you want for columns and rows.");
+    if (getNumberOfRowsAndColumns > 100) {
         alert("Invalid input: The number requested is greater than 100")
     } else if (getNumberOfRowsAndColumns <= 100 && getNumberOfRowsAndColumns > 0) {
-        console.log("Correct!")
+        container.innerHTML = "";
+        createGrid(getNumberOfRowsAndColumns);
+    } else if (getNumberOfRowsAndColumns <= 0) {
+        alert("Invalid input: The number requested is 0 or is less than 0")
     } else {
-        alert("Invalid input: The number requested is less than 0")
+        alert("Invalid input: Please input a valid integer between 1 to 100")
     }
 }
 
