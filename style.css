@@ -6,11 +6,8 @@ body {
 
 .container {
     display: flex;
-    align-items: center;
+    border: 5px solid black;
     background-color: yellow;
-    border: 1px solid red;
-    height: auto;
-    width: auto;
 }
 
 .gridRow {
@@ -20,18 +17,25 @@ body {
 .gridSquares {
     flex-direction: column;
     border: 1px solid black;
-    height: 50px;
-    width: 50px;
-    background-color: yellow;
+    background-color: white;
+    box-sizing: border-box;
 }
 
 .hover {
     flex-direction: column;
     border: 1px solid black;
+    background-color: black;
+    box-sizing: border-box;
+}
+
+.randomColor {
+    flex-direction: column;
+    border: 1px solid black;
     height: 50px;
     width: 50px;
-    background-color: black;
+    background-color: green;
 }
+
 
 #sizeOfGrid {
     margin-bottom: 25px;

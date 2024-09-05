@@ -1,4 +1,4 @@
-sizeOfGrid = 16;
+let sizeOfGrid = 16;
 
 const container = document.querySelector('.container')
 const resetButton = document.querySelector('button')
@@ -15,6 +15,11 @@ const createGrid = (amountOfGrids) => {
             // column makes a div
             const square = document.createElement('div');
             square.classList.add('gridSquares')
+            const squareDimensions = 960 / sizeOfGrid
+            console.log(squareDimensions)
+            square.style.height = `${squareDimensions}px`
+            square.style.width = `${squareDimensions}px`
+
             square.addEventListener('mouseover', () => {
                 square.classList.remove('gridSquares')
                 square.classList.add('hover')
@@ -26,21 +31,29 @@ const createGrid = (amountOfGrids) => {
 
 }
 
-
-
-function gridResizePrompt(){
+function gridResizePrompt() {
     let getNumberOfRowsAndColumns = prompt("Please input a valid integer between 1 to 100 for the number of squares you want for columns and rows.");
     if (getNumberOfRowsAndColumns > 100) {
         alert("Invalid input: The number requested is greater than 100")
     } else if (getNumberOfRowsAndColumns <= 100 && getNumberOfRowsAndColumns > 0) {
         container.innerHTML = "";
-        createGrid(getNumberOfRowsAndColumns);
+        sizeOfGrid = getNumberOfRowsAndColumns
+        createGrid(sizeOfGrid);
     } else if (getNumberOfRowsAndColumns <= 0) {
         alert("Invalid input: The number requested is 0 or is less than 0")
     } else {
         alert("Invalid input: Please input a valid integer between 1 to 100")
     }
 }
+
+function randomColorMode()  {
+    const square = document.createElement('div');
+    square.addEventListener('mouseover', () => {
+        square.classList.remove('gridSquares')
+        square.classList.add('randomColor')
+    });
+} 
+
 
 
 createGrid(sizeOfGrid)
