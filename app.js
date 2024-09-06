@@ -16,7 +16,6 @@ const createGrid = (amountOfGrids) => {
             const square = document.createElement('div');
             square.classList.add('gridSquares')
             const squareDimensions = 960 / sizeOfGrid
-            console.log(squareDimensions)
             square.style.height = `${squareDimensions}px`
             square.style.width = `${squareDimensions}px`
 
@@ -47,11 +46,13 @@ function gridResizePrompt() {
 }
 
 function randomColorMode()  {
-    const square = document.createElement('div');
-    square.addEventListener('mouseover', () => {
-        square.classList.remove('gridSquares')
-        square.classList.add('randomColor')
-    });
+    let rgbToggle = document.getElementById("randomizeColorMode");
+    console.log(rgbToggle.innerText)
+    if (rgbToggle.innerText == "Random Color Mode : OFF") {
+        rgbToggle.innerText = "Random Color Mode : ON";
+        }   else {
+            rgbToggle.innerText = "Random Color Mode : OFF";
+        }   
 } 
 
 
