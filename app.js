@@ -1,9 +1,19 @@
 let sizeOfGrid = 16;
+let rgbToggleValidation;
 
 const container = document.querySelector('.container')
 const resetButton = document.querySelector('button')
 
-const createGrid = (amountOfGrids) => {
+const createRGBValue = () => {
+    const red = Math.floor(Math.random() * 256)
+    const green = Math.floor(Math.random() * 256)
+    const blue = Math.floor(Math.random() * 256)
+
+    return {red, green, blue}
+}
+
+
+const createGrid = (amountOfGrids) => {    
     //making a loop to make the rows
     for (i = 0; i < amountOfGrids; i++) {
             // row makes a div
@@ -20,8 +30,15 @@ const createGrid = (amountOfGrids) => {
             square.style.width = `${squareDimensions}px`
 
             square.addEventListener('mouseover', () => {
-                square.classList.remove('gridSquares')
-                square.classList.add('hover')
+                if (rgbToggleValidation == true) {
+                    const {red, green, blue} = createRGBValue()
+                    console.log(red, green, blue)
+                    const randomBackgroundColor = "rgb(" + red + "," + green + "," + blue + ")";
+                    square.style.background = randomBackgroundColor;
+                } else {
+                    const blackBackgroundColor = "rgb(" + 0 + "," + 0 + "," + 0 + ")";
+                    square.style.background = blackBackgroundColor; 
+                }
             });
             row.appendChild(square)
         }
@@ -47,11 +64,14 @@ function gridResizePrompt() {
 
 function randomColorMode()  {
     let rgbToggle = document.getElementById("randomizeColorMode");
-    console.log(rgbToggle.innerText)
     if (rgbToggle.innerText == "Random Color Mode : OFF") {
         rgbToggle.innerText = "Random Color Mode : ON";
+        rgbToggleValidation = true;
+        console.log(rgbToggleValidation)
         }   else {
             rgbToggle.innerText = "Random Color Mode : OFF";
+            rgbToggleValidation = false;
+            console.log(rgbToggleValidation)
         }   
 } 
 
