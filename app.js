@@ -1,5 +1,6 @@
 let sizeOfGrid = 16;
-let rgbToggleValidation;
+let rgbToggleValidation = false;
+let proDarkToggleValidation = false;
 
 const container = document.querySelector('.container')
 const resetButton = document.querySelector('button')
@@ -11,7 +12,6 @@ const createRGBValue = () => {
 
     return {red, green, blue}
 }
-
 
 const createGrid = (amountOfGrids) => {    
     //making a loop to make the rows
@@ -28,23 +28,54 @@ const createGrid = (amountOfGrids) => {
             const squareDimensions = 960 / sizeOfGrid
             square.style.height = `${squareDimensions}px`
             square.style.width = `${squareDimensions}px`
+            const {red, green, blue} = createRGBValue()
+            let backgroundOpacityCounter = 0;
+            let backgroundOpacity = 0;
 
             square.addEventListener('mouseover', () => {
-                if (rgbToggleValidation == true) {
-                    const {red, green, blue} = createRGBValue()
-                    console.log(red, green, blue)
-                    const randomBackgroundColor = "rgb(" + red + "," + green + "," + blue + ")";
-                    square.style.background = randomBackgroundColor;
-                } else {
-                    const blackBackgroundColor = "rgb(" + 0 + "," + 0 + "," + 0 + ")";
-                    square.style.background = blackBackgroundColor; 
-                }
+                    if (rgbToggleValidation == true) {
+                        if (proDarkToggleValidation == true) {
+                            const randomBackgroundColor = "rgb(" + red + "," + green + "," + blue + ")";
+                            square.style.background = randomBackgroundColor;
+
+                            if (backgroundOpacityCounter < 10)   {
+                                backgroundOpacity += 0.1;
+                                backgroundOpacityCounter += 1;
+                                console.log("backgroundOpacity" + backgroundOpacity + " @ " + backgroundOpacityCounter + "times")
+
+                                square.style.opacity = backgroundOpacity
+                                } else {}
+                                
+                        }
+                            else if (proDarkToggleValidation == false) {
+                                    const randomBackgroundColor = "rgb(" + red + "," + green + "," + blue + ")";
+                                    square.style.background = randomBackgroundColor;
+                        }
+
+                    } else if (rgbToggleValidation == false) {
+                            if (proDarkToggleValidation == true) {
+                                if (backgroundOpacityCounter < 10)   {
+                                    backgroundOpacity += 0.1;
+                                    backgroundOpacityCounter += 1;
+                                    console.log("backgroundOpacity" + backgroundOpacity + " @ " + backgroundOpacityCounter + "times")
+
+                                    square.style.opacity = backgroundOpacity
+
+                                    const blackBackgroundColor = "rgb(0 , 0, 0)";
+                                    square.style.background = blackBackgroundColor;
+                                } else {}
+                        } 
+                            else if (proDarkToggleValidation == false) {
+                                const blackBackgroundColor = "rgb(0 , 0, 0)";
+                                square.style.background = blackBackgroundColor;
+                                backgroundOpacity = 1;
+                        }
+                    }  
             });
             row.appendChild(square)
         }
         container.appendChild(row)
     }
-
 }
 
 function gridResizePrompt() {
@@ -73,7 +104,20 @@ function randomColorMode()  {
             rgbToggleValidation = false;
             console.log(rgbToggleValidation)
         }   
-} 
+}
+
+function proDarkMode()  {
+    let darkToggle = document.getElementById("progressiveDarkMode");
+    if (darkToggle.innerText == "Progressively Darker Mode : OFF") {
+        darkToggle.innerText = "Progressively Darker Mode : ON";
+        proDarkToggleValidation = true;
+        console.log(proDarkToggleValidation)
+        }   else {
+            darkToggle.innerText = "Progressively Darker Mode : OFF";
+            proDarkToggleValidation = false;
+            console.log(proDarkToggleValidation)
+        }   
+}
 
 
 
