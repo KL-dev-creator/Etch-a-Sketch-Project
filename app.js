@@ -119,6 +119,12 @@ function proDarkMode()  {
         }   
 }
 
+function resetMode() {
+        let getNumberOfRowsAndColumns = sizeOfGrid
+        container.innerHTML = "";
+        sizeOfGrid = getNumberOfRowsAndColumns
+        createGrid(sizeOfGrid);
+}
 
 
 createGrid(sizeOfGrid)
