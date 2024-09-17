@@ -5,6 +5,7 @@ let proDarkToggleValidation = false;
 const container = document.querySelector('.container')
 const resetButton = document.querySelector('button')
 
+// making a constant to create random values for RGB generation
 const createRGBValue = () => {
     const red = Math.floor(Math.random() * 256)
     const green = Math.floor(Math.random() * 256)
@@ -25,55 +26,59 @@ const createGrid = (amountOfGrids) => {
             // column makes a div
             const square = document.createElement('div');
             square.classList.add('gridSquares')
+            // each square auto-adjusts their size based on number of rows and columns
             const squareDimensions = 960 / sizeOfGrid
             square.style.height = `${squareDimensions}px`
             square.style.width = `${squareDimensions}px`
+            // const from earlier gives each square an RGB value
             const {red, green, blue} = createRGBValue()
             let backgroundOpacityCounter = 0;
             let backgroundOpacity = 0;
 
             square.addEventListener('mouseover', () => {
                     if (rgbToggleValidation == true) {
-                        if (proDarkToggleValidation == true) {
+                        if (proDarkToggleValidation == false) {
+                            // if rgb is instant then opacity will be one immediately
                             const randomBackgroundColor = "rgb(" + red + "," + green + "," + blue + ")";
                             square.style.background = randomBackgroundColor;
 
-                            if (backgroundOpacityCounter < 10)   {
-                                backgroundOpacity += 0.1;
-                                backgroundOpacityCounter += 1;
-                                console.log("backgroundOpacity" + backgroundOpacity + " @ " + backgroundOpacityCounter + "times")
+                            square.style.opacity == 1;    
+                        } else if (proDarkToggleValidation == true) {
+                            backgroundOpacity += 0.1;
+                            backgroundOpacityCounter += 1;
+                            square.style.opacity = backgroundOpacity
 
-                                square.style.opacity = backgroundOpacity
-                                } else {}
-                                
-                        }
-                            else if (proDarkToggleValidation == false) {
-                                    const randomBackgroundColor = "rgb(" + red + "," + green + "," + blue + ")";
-                                    square.style.background = randomBackgroundColor;
+                            const randomBackgroundColor = "rgb(" + red + "," + green + "," + blue + ")";
+                            square.style.background = randomBackgroundColor;
+                        } else  {
+
                         }
 
                     } else if (rgbToggleValidation == false) {
-                            if (proDarkToggleValidation == true) {
-                                if (backgroundOpacityCounter < 10)   {
-                                    backgroundOpacity += 0.1;
-                                    backgroundOpacityCounter += 1;
-                                    console.log("backgroundOpacity" + backgroundOpacity + " @ " + backgroundOpacityCounter + "times")
+                        if (proDarkToggleValidation == false) {
+                            // if black is instant then opacity will be 1 instantly
 
-                                    square.style.opacity = backgroundOpacity
-
-                                    const blackBackgroundColor = "rgb(0 , 0, 0)";
-                                    square.style.background = blackBackgroundColor;
-                                } else {}
-                        } 
-                            else if (proDarkToggleValidation == false) {
+                            const blackBackgroundColor = "rgb(0 , 0, 0)";
+                            square.style.background = blackBackgroundColor;
+                            backgroundOpacity == 1;
+                        } else if (proDarkToggleValidation == true) {
+                            if (backgroundOpacityCounter < 10) {
+                                backgroundOpacity += 0.1;
+                                backgroundOpacityCounter += 1;
+                                square.style.opacity = backgroundOpacity
+    
                                 const blackBackgroundColor = "rgb(0 , 0, 0)";
                                 square.style.background = blackBackgroundColor;
-                                backgroundOpacity = 1;
+                            } else {
+
+                            }
                         }
                     }  
             });
+            // each square of a column will be appended to the row
             row.appendChild(square)
         }
+        // each row will be appended to the container
         container.appendChild(row)
     }
 }
@@ -83,6 +88,7 @@ function gridResizePrompt() {
     if (getNumberOfRowsAndColumns > 100) {
         alert("Invalid input: The number requested is greater than 100")
     } else if (getNumberOfRowsAndColumns <= 100 && getNumberOfRowsAndColumns > 0) {
+        // promps user for value and if value is valied it changes the size of the grid by the prompted value
         container.innerHTML = "";
         sizeOfGrid = getNumberOfRowsAndColumns
         createGrid(sizeOfGrid);
@@ -95,14 +101,14 @@ function gridResizePrompt() {
 
 function randomColorMode()  {
     let rgbToggle = document.getElementById("randomizeColorMode");
+    // if the button text says off then pressing it will change it to on and give a true value to rgbvalidation
     if (rgbToggle.innerText == "Random Color Mode : OFF") {
         rgbToggle.innerText = "Random Color Mode : ON";
         rgbToggleValidation = true;
-        console.log(rgbToggleValidation)
         }   else {
+                // if the button text says on then pressing it will change it to off and give a false value to rgbvalidation
             rgbToggle.innerText = "Random Color Mode : OFF";
             rgbToggleValidation = false;
-            console.log(rgbToggleValidation)
         }   
 }
 
@@ -111,15 +117,14 @@ function proDarkMode()  {
     if (darkToggle.innerText == "Progressively Darker Mode : OFF") {
         darkToggle.innerText = "Progressively Darker Mode : ON";
         proDarkToggleValidation = true;
-        console.log(proDarkToggleValidation)
         }   else {
             darkToggle.innerText = "Progressively Darker Mode : OFF";
             proDarkToggleValidation = false;
-            console.log(proDarkToggleValidation)
         }   
 }
 
 function resetMode() {
+        // recreates grid to sizeofgrid which is defaulted to 16 but can be changed by the gridresizeprompt
         let getNumberOfRowsAndColumns = sizeOfGrid
         container.innerHTML = "";
         sizeOfGrid = getNumberOfRowsAndColumns
